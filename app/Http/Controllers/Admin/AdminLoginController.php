@@ -9,22 +9,20 @@ class AdminLoginController extends Controller
 {
 
     public function Adminlogin(){ return view('admin.admin-login'); }
-
     public function loginstore(Request $request){
         $validator = \Validator::make($request->all(), [ 'email' => 'required|email','password' => 'required|min:6',]);
         if ($validator->fails()) {
-            return response()->json(['status'=>false,'error'=>$validator->errors()->all()]);
-          } else {
-            if (\Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                return response()->json(['status'=>true,'error'=>$validator->errors()->all()]);
-            } else {
-                return response()->json(['status'=>false,'error'=>['Sorry User not found.']]);            }
-
-          }
-         return response()->json($req);
-
-
+            return \Response::json(array(  'success' => false,'errors' => $validator->getMessageBag()->toArray() ), 400);
     }
+    if (\Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        return response()->json('sadsadddddddddddd');
+        // return response()->json(['status'=>true,'error'=>$validator->errors()->all()]);
+    } else {
+        return response()->json('Response');
+        // return \Response::json(array('success' =>false,'errors' =>'Unauthorized  User Login'), 401);
+  }
+
+}
 
 
 }

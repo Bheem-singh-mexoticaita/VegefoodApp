@@ -21,17 +21,15 @@
                         <div class="form-outline mb-4">
                             <label class="form-label" for="form2Example17">Email address</label>
                           <input type="text" id="email" name="email" class="form-control form-control-lg" />
-                            <p id="email-error" class="text-danger error">Enter Emaill Address</p>
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label" for="form2Example27">Password</label>
-                            <input type="password" id="input-password" class="input-password form-control form-control-lg" />
+                            <input type="password" name="password" id="input-password" class="input-password form-control form-control-lg" />
                             <i class="bi bi-eye-slash"
                             id="togglePassword"></i>
                             <div class="meter-text" id="meter-text">
                               <span>password strength : </span> <span class="meter-status" id="meter-status"></span>
                               <div class="meter" id="meter"><div class="meter-bar" id="meter-bar"></div> </div>
-                              <p id="password-error" class="text-danger error">Enter Emaill Address</p>
                             </div>
                         <div class="pt-1 mb-4">
                           <button class="btn btn-dark btn-lg btn-block" id="sign_in" type="button">Login</button>
