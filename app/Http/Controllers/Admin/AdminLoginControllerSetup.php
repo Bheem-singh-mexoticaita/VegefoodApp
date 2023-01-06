@@ -10,7 +10,6 @@ class AdminLoginControllerSetup extends Controller
     public function AdminLogin(){
         return view('admin.admin-login');
       }
-
       public function loginstore(Request $request){
         try{
             // return "adsssadsad";
@@ -24,7 +23,7 @@ class AdminLoginControllerSetup extends Controller
             }
 
             if(\Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                return \Response::json(['code' => 200,'success' => true, 'errors' =>'Login Successfully','token'=>$user->createToken("authToken")->plainTextToken], 200);
+                return \Response::json(['code' => 200,'success' => true, 'errors' =>'Login Successfully','token'=>\Auth::user()->createToken("authToken")->plainTextToken], 200);
             }else{
                 return \Response::json(['code' => 401,'success' => false, 'errors' => 'Incorrect Email And Password Details'], 401);
             }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 class AdminApiController extends Controller
 {
-   function loginWithAPI(Request $request){
+   public function loginWithAPI(Request $request){
     try{
         // return "adsssadsad";
         $validator = \Validator::make($request->all(), [
@@ -18,26 +18,11 @@ class AdminApiController extends Controller
         {
             if ($validator->fails()) { return \Response::json(['code' => 400,'success' => false, 'errors' => $validator->getMessageBag()->toArray()], 400); }
         }
-        $user = User::where('email', $request->email)->first();
-        if ($user) {
-            if (\Hash::check($request->password, $user->password)) {
-                return \Response::json(['code' => 200,'success' => true, 'errors' =>'Login Successfully','token'=>$user->createToken("authToken")->plainTextToken], 200);
-            } else {
-                return \Response::json(['code' => 402,'success' => false, 'errors' => 'Incorrect Password'], 402);
-            }
 
-            // $mailData = [
-            //     'title' => 'Mail from ItSolutionStuff.com',
-            //     'body' => 'This is for testing email using smtp.'
-            // ];
-
-            // Mail::to('your_email@gmail.com')->send(new AdminMails($mailData));
-
-            // dd("Email is sent successfully.");
-
-
+        if(\Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            return \Response::json(['code' => 200,'success' => true, 'errors' =>'Login Successfully','token'=>\Auth::user()->createToken("authToken")->plainTextToken], 200);
         }else{
-            return response(['code'=>422,'success' => false,'errors'=>'unauthorized user login'], 422);
+            return \Response::json(['code' => 401,'success' => false, 'errors' => 'Incorrect Email And Password Details'], 401);
         }
 
     }catch (\Throwable $th) {
@@ -46,5 +31,21 @@ class AdminApiController extends Controller
             'message' => $th->getMessage()
         ], 500);
     }
+   }
+
+
+   public function fetchAdminDetails(){
+
+    if(\Auth::user()){
+        return \Response::json(['code' => 200,'success' => true, 'message' =>'Data Get Successfully','data'=>[\Auth::user()]], 200);
+
+    }
+
+
+
+
+// return "Asdasdsadsa";
+
+
    }
 }
