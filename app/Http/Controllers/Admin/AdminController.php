@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Country;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Admin\Client;
 
@@ -47,6 +48,8 @@ public function AdminDashboard(){
     return \View::make('admin.index', array('name' => \Auth::user()));
 }
 public function AdminShowProfile(){
-    return \View::make('admin.admin-profile', array('name' => \Auth::user()));
+    $data['name']=\Auth::user();
+    $data['countries'] = Country::get(["id", "name","shortname","phonecode"]);
+    return \View::make('admin.admin-profile', $data);
 }
 }

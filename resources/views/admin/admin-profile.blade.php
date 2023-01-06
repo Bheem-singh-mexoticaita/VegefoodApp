@@ -1,4 +1,5 @@
 @include('admin.partials.header-section')
+{{-- {{$countries}} --}}
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -160,9 +161,11 @@
                             <div class="col-md-4">
                                 <label for="inputState" class="form-label">Country</label>
                                 <select id="inputState" class=" form-control form-select">
-                                  <option selected>Choose...</option>
-                                  <option>...</option>
-                                </select>
+                                    <option selected>Choose...</option>
+                                @foreach ($countries as $item)
+                                <option value="{!!$item->name!!}" county_id="{!!$item->id!!}" shortname="{!!$item->shortname!!}" phonecode="{!!$item->phonecode!!}">{!!$item->name!!}</option>
+                                @endforeach
+                            </select>
                               </div>
 
                         <div class="col-md-4">
