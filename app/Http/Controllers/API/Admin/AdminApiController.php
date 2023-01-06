@@ -35,17 +35,8 @@ class AdminApiController extends Controller
 
 
    public function fetchAdminDetails(){
-
     if(\Auth::user()){
-        return \Response::json(['code' => 200,'success' => true, 'message' =>'Data Get Successfully','data'=>[\Auth::user()]], 200);
-
+        return \Response::json(['code' => 200,'success' => true, 'message' =>'success','data'=>[\Auth::user()]], 200);
     }
-
-
-
-
-// return "Asdasdsadsa";
-
-
    }
 }
