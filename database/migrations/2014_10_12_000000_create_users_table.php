@@ -17,6 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phoneNumber')->nullable();
+            $table->enum('gender', ['Male', 'Female']);
+            $table->date('DOB')->nullable();
+            $table->string('Bio')->nullable();
+            $table->string('Address')->nullable();
+            $table->integer('type')->nullable();
+            $table->string('street2')->nullable();
+            $table->string('state_code')->nullable();
+            $table->string('City')->nullable();
+            $table->text('zip')->nullable();
+            $table->string('country')->nullable();
+            $table->softDeletes()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
