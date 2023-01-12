@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -17,7 +16,6 @@ class AdminController extends Controller
 
    public function loginstore(Request $request){
     try{
-        // return "adsssadsad";
         $validator = \Validator::make($request->all(), [
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
@@ -26,7 +24,6 @@ class AdminController extends Controller
         {
             if ($validator->fails()) { return \Response::json(['code' => 400,'success' => false, 'errors' => $validator->getMessageBag()->toArray()], 400); }
         }
-
         if(\Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $request->session()->put('token',\Auth::user()->createToken("authToken")->plainTextToken);
 
